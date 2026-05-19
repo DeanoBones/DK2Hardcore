@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DK2 Hardcore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
+    font-family:'Rajdhani',sans-serif;
+}
+
+/* ===== BACKGROUND ===== */
+
+.bg{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#500000 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#111111 0%,transparent 40%),
+    linear-gradient(to bottom,#050505,#0c0c0c);
+    z-index:-2;
+}
+
+.grid{
+    position:fixed;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    z-index:-1;
+    opacity:.25;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:80px 30px;
+}
+
+.container{
+    width:100%;
+    max-width:1300px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:10px 18px;
+    border:1px solid rgba(255,80,80,.4);
+    background:rgba(255,0,0,.08);
+    border-radius:999px;
+    color:#ff7b7b;
+    font-size:14px;
+    margin-bottom:25px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+h1{
+    font-family:'Orbitron',sans-serif;
+    font-size:96px;
+    line-height:.9;
+    margin-bottom:25px;
+}
+
+.red{
+    color:#ff3d3d;
+    text-shadow:0 0 30px rgba(255,0,0,.5);
+}
+
+.subtitle{
+    color:#b0b0b0;
+    font-size:24px;
+    line-height:1.6;
+    max-width:650px;
+}
+
+/* ===== BUTTONS ===== */
+
+.buttons{
+    display:flex;
+    gap:20px;
+    margin-top:45px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:18px 34px;
+    border-radius:18px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:20px;
+    transition:.2s;
+}
+
+.btn-main{
+    background:#ff3d3d;
+    color:white;
+    box-shadow:0 0 30px rgba(255,0,0,.35);
+}
+
+.btn-main:hover{
+    transform:translateY(-3px);
+    background:#ff5555;
+}
+
+.btn-secondary{
+    border:1px solid #444;
+    color:white;
+    background:#121212;
+}
+
+.btn-secondary:hover{
+    border-color:#777;
+    transform:translateY(-3px);
+}
+
+.small{
+    margin-top:20px;
+    color:#666;
+    font-size:14px;
+}
+
+/* ===== IMAGE PANEL ===== */
+
+.panel{
+    position:relative;
+    border-radius:32px;
+    overflow:hidden;
+    border:1px solid #222;
+    background:#111;
+    box-shadow:0 30px 60px rgba(0,0,0,.6);
+}
+
+.panel img{
+    width:100%;
+    height:650px;
+    object-fit:cover;
+    opacity:.82;
+}
+
+.panel-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.95), transparent 50%);
+}
+
+.panel-text{
+    position:absolute;
+    bottom:40px;
+    left:40px;
+    right:40px;
+}
+
+.panel-text h2{
+    font-family:'Orbitron',sans-serif;
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.panel-text p{
+    color:#ccc;
+    font-size:20px;
+    line-height:1.6;
+}
+
+/* ===== FEATURES ===== */
+
+.section{
+    padding:120px 30px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-title h2{
+    font-family:'Orbitron',sans-serif;
+    font-size:56px;
+    margin-bottom:20px;
+}
+
+.section-title p{
+    color:#999;
+    font-size:22px;
+    max-width:800px;
+    margin:auto;
+    line-height:1.7;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+    max-width:1300px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(20,20,20,.9);
+    border:1px solid #222;
+    border-radius:28px;
+    padding:35px;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#ff3d3d;
+    box-shadow:0 20px 40px rgba(255,0,0,.12);
+}
+
+.card h3{
+    color:#ff5555;
+    font-size:30px;
+    margin-bottom:20px;
+    font-family:'Orbitron',sans-serif;
+}
+
+.card p{
+    color:#bdbdbd;
+    line-height:1.8;
+    font-size:18px;
+}
+
+/* ===== MOD SECTION ===== */
+
+.mod-section{
+    background:linear-gradient(to bottom,#0b0b0b,#050505);
+    border-top:1px solid #222;
+    border-bottom:1px solid #222;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#666;
+    font-size:14px;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:1000px){
+
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        font-size:72px;
+    }
+
+    .panel img{
+        height:450px;
+    }
+
+    .section-title h2{
+        font-size:42px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="grid"></div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="hero-grid">
+
+<div>
+
+<div class="badge">
+Door Kickers 2 Hardcore Launcher
+</div>
+
+<h1>
+DK2
+<span class="red">HARDCORE</span>
+</h1>
+
+<p class="subtitle">
+Transform Door Kickers 2 into a brutal persistent roguelike campaign where every operator matters.
+</p>
+
+<div class="buttons">
+
+<a href="DK2Launcher.zip" class="btn btn-main" download>
+DOWNLOAD LAUNCHER
+</a>
+
+<a href="Brotherhood.zip" class="btn btn-secondary" download>
+OPTIONAL MOD
+</a>
+
+
+</div>
+
+<div class="small">
+WARNING: This system can permanently remove operators from existing squads. If you wish to keep them set the Death chance to 0% in the config file for the first launch.
+</div>
+
+</div>
+
+<div class="panel">
+
+<img src="images/soldiers.jpg">
+
+<div class="panel-overlay"></div>
+
+<div class="panel-text">
+
+<h2>
+Every Mission Matters
+</h2>
+
+<p>
+Persistent casualties. Persistent progression.
+Veterans survive across operations — until they don't.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LAUNCHER FEATURES -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+The Hardcore Launcher
+</h2>
+
+<p>
+Simply run launcher.exe instead of Door Kickers 2 and the hardcore system handles everything automatically when you next restart.
+</p>
+
+</div>
+
+<div class="features">
+
+<div class="card">
+
+<h3>Permadeath</h3>
+
+<p>
+Operators can permanently die during missions and will be removed from your squad.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Automatic Processing</h3>
+
+<p>
+The launcher updates the roster automatically when the game closes. No manual steps required.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Brotherhood Mod</h3>
+
+<p>
+For increased difficulty try the optional mod that locks weapons behind battle honors.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Battle Honors</h3>
+
+<p>
+Completing missions with 3 stars will earn Battle Honors.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+DK2 HARDCORE LAUNCHER SYSTEM
+</footer>
+
+</body>
+</html>
